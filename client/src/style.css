@@ -18,6 +18,7 @@ a:hover {
 } */
 .main-container {
   min-height: calc(100vh - var(--footer-height));
+  display: inline-block;
 }
 
 .gradient {
@@ -48,7 +49,7 @@ a:hover {
 
 body {
   width: 100%;
-  background-color: #d7d7d7ec;
+  /* background-color: #d7d7d7ec; */
 
   /* color: white; */
   margin: 0;
