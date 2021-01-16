@@ -33,5 +33,5 @@ mongoose.connect(process.env.ATLAS_URL || "mongodb://localhost/mern", mongoOptio
 
 // Start the API server
 app.listen(PORT, function () {
-	console.log(`🌎  ==> API Server now listening on PORT ${PORT}! http://localhost:3000`);
+	console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });

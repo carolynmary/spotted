@@ -6,19 +6,21 @@ import Comment from "./pages/Comment";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
-import Head from "./components/Head";
+import Head from "./components/Head/Head";
 import userAPI from "./utils/userAPI";
 import ProtectedRoute from "./components/ProtectedRoute"
-import Nav from "./components/Nav"
+import Nav from "./components/Nav/Nav"
 import Feed from "./pages/Feed";
 import Map from "./pages/Map";
 import Clinic from "./pages/Clinic";
 import Connect from "./pages/Connect";
 import Info from "./pages/Info";
 import Profile from "./pages/Profile";
+import "./App.scss";
 
 function App() {
 	const [userState, setUserState] = useState({});
+	const [collapsed, setCollapsed] = useState(true);
 
 	useEffect(() => {
 		// auth user on first render
@@ -35,46 +37,45 @@ function App() {
 			.catch((err) => console.log('registered user:', err.response));
 	}
 
+	const handleCollapsedChange = (checked) => {
+		setCollapsed(checked);
+	};
+
 	return (
 		<Router>
-			<Head />
-			<Nav />
-			<Container>
-				<Switch>
-					<Route exact path='/feed' render={props => (
-						<Feed />
-					)} />
-					<Route exact path='/map' render={props => (
-						<Map />
-					)} />
-					<Route exact path='/clinic' render={props => (
-						<Clinic />
-					)} />
-					<Route exact path='/connect' render={props => (
-						<Connect />
-					)} />
-					<Route exact path='/info' render={props => (
-						<Info />
-					)} />
-					<Route exact path='/profile' render={props => (
-						<Profile />
-					)} />
+			<Container className={`app`}>
+				<Nav
+					collapsed={collapsed}
+					handleCollapsedChange={handleCollapsedChange}
+				/>
+				<main>
+					<Head />
+					<Switch>
+						{/* spotted routes */}
+						<Route exact path='/feed' component={Feed} />
+						<Route exact path='/map' component={Map} />
+						<Route exact path='/clinic' component={Clinic} />
+						<Route exact path='/connect' component={Connect} />
+						<Route exact path='/info' component={Info} />
+						<Route exact path='/profile' component={Profile} />
 
+						{/* boilerplate routes */}
+						<Route exact path='/' render={props => (
+							<Login {...props} userState={userState} setUserState={setUserState} />
+						)} />
+						<Route exact path='/signup' render={props => (
+							<Signup {...props} authenticate={authenticate} user={userState} />
+						)} />
+						<ProtectedRoute exact path={["/", "/comments"]}>
+							<Comments {...userState} />
+						</ProtectedRoute>
+						<ProtectedRoute exact path='/comments/:id' >
+							<Comment {...userState} />
+						</ProtectedRoute>
+						<Route component={NoMatch} />
+					</Switch>
+				</main>
 
-					<Route exact path='/' render={props => (
-						<Login {...props} userState={userState} setUserState={setUserState} />
-					)} />
-					<Route exact path='/signup' render={props => (
-						<Signup {...props} authenticate={authenticate} user={userState} />
-					)} />
-					<ProtectedRoute exact path={["/", "/comments"]}>
-						<Comments {...userState} />
-					</ProtectedRoute>
-					<ProtectedRoute exact path='/comments/:id' >
-						<Comment {...userState} />
-					</ProtectedRoute>
-					<Route component={NoMatch} />
-				</Switch>
 			</Container>
 			{ userState.email ? <Redirect to="/comments" /> : <></>}
 		</Router>

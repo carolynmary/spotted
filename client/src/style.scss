@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
-* { font-family: 'Roboto', sans-serif; }
+* { 
+  font-family: 'Roboto', sans-serif; 
+}
 
 /* stylelint-disable */
 :root {
-  --footer-height: 52px;
+  --footer-height: 40px;
 }
 /* stylelint-enable */
 a { color: white;}
@@ -18,7 +20,7 @@ a:hover {
 } */
 .main-container {
   min-height: calc(100vh - var(--footer-height));
-  display: inline-block;
+  display: inline-flex;
 }
 
 .gradient {
@@ -75,13 +77,27 @@ body {
 
 @media (min-width: 1200px) {
   .container {
-    width: 990px;
+    // width: 990px;
+    width: 100%;
   }
 }
 
 @media (min-width: 992px) {
   .container {
-    width: 990px;
+    // width: 990px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px)  {
+  .container, .container-md, .container-sm {
+      max-width: 100%;
+  }
+}
+
+@media (min-width: 576px)  {
+  .container, .container-sm {
+      max-width: 100%;
   }
 }
 
