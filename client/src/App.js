@@ -16,6 +16,8 @@ import Clinic from "./pages/Clinic";
 import Connect from "./pages/Connect";
 import Info from "./pages/Info";
 import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
+import MyFeed from "./pages/MyFeed";
 import "./App.scss";
 
 function App() {
@@ -43,21 +45,40 @@ function App() {
 
 	return (
 		<Router>
-			<Container className={`app`}>
-				<Nav
+			<Container>
+				<Nav className={`app`}
 					collapsed={collapsed}
 					handleCollapsedChange={handleCollapsedChange}
 				/>
-				<main>
+				<main className="mainOverrides">
 					<Head />
 					<Switch>
 						{/* spotted routes */}
-						<Route exact path='/feed' component={Feed} />
+						<Route exact path={["/", "/feed"]} component={Feed} />
 						<Route exact path='/map' component={Map} />
+						<Route exact path='/info' component={Info} />
 						<Route exact path='/clinic' component={Clinic} />
 						<Route exact path='/connect' component={Connect} />
-						<Route exact path='/info' component={Info} />
 						<Route exact path='/profile' component={Profile} />
+
+						<Route exact path='/signup' render={props => (
+							<Signup {...props} authenticate={authenticate} user={userState} />
+						)} />
+
+						<Route exact path='/login' component={Login} />
+
+						<ProtectedRoute exact path='/myfeed' >
+							<MyFeed {...userState} />
+						</ProtectedRoute>
+
+						<ProtectedRoute exact path='/settings' >
+							<Settings {...userState} />
+						</ProtectedRoute>
+
+						<Route component={NoMatch} />
+
+
+
 
 						{/* boilerplate routes */}
 						<Route exact path='/' render={props => (
@@ -66,12 +87,15 @@ function App() {
 						<Route exact path='/signup' render={props => (
 							<Signup {...props} authenticate={authenticate} user={userState} />
 						)} />
+
 						<ProtectedRoute exact path={["/", "/comments"]}>
 							<Comments {...userState} />
 						</ProtectedRoute>
+
 						<ProtectedRoute exact path='/comments/:id' >
 							<Comment {...userState} />
 						</ProtectedRoute>
+
 						<Route component={NoMatch} />
 					</Switch>
 				</main>

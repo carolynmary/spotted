@@ -1,18 +1,20 @@
 import React from "react";
+import { Col, Row } from "../Grid";
 import useLogRender from "../../utils/useLogPath";
 import logo from "../../images/spotted-logo.svg"
-// import "./Head.scss";
+import "./Head.scss";
 
-function Head () {
+function Head() {
 	useLogRender();
 
 	return (
-		<header>
-			{/* why whole row clickable? */}
-			<span>
-				<a href="/"><img src={logo} alt="spotted" className="logo" /></a>
-			</span>
-		</header>
+		<Row>
+			<Col size="12">
+				<header className="header">
+					<a href="/"><img src={logo} alt="spotted" className="logo" /></a>
+				</header>
+			</Col>
+		</Row>
 	);
 }
 

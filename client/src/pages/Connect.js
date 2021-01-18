@@ -1,16 +1,14 @@
 import React from "react";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row } from "../components/Grid";
 
-function Feed() {
+function Connect() {
   return (
-    <Container fluid>
       <Row>
         <Col size="md-12">
           <h1>CONNECT</h1>
         </Col>
       </Row>
-    </Container>
   );
 }
 
-export default Feed;
+export default Connect;

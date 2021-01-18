@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
-$sidebar-bg-color: #fff;
-$submenu-bg-color: rgba(255, 255, 255, 0.2);
-$submenu-bg-color-collapsed: rgba(255, 255, 255, 0.2);
+$sidebar-bg-color: rgba(0, 0, 0, 1);
+$submenu-bg-color: rgba(255, 255, 255, .2);
+$submenu-bg-color-collapsed: rgba(0, 0, 0, 1);
 $sidebar-color: #adadad;
 $highlight-color: #d8d8d8;
 $icon-bg-color: rgba(255, 255, 255, 0.05);
@@ -20,9 +20,19 @@ $icon-size: 35px;
 //   height: 100%;
 // }
 
+.mainOverrides {
+  width: 100%;
+  padding-left: 15px;
+  margin-top: -16px;
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
 .pro-sidebar {
   height: auto;
-  margin-top: -15px ;
+  margin-top: -16px ;
   margin-left: -15px ;
   width: 185px;
   min-width: 185px;
@@ -36,6 +46,10 @@ $icon-size: 35px;
 .pro-menu-item {
   margin-bottom: 20px;
 }
+
+// .react-switch-bg {
+//   background-color:rgba(255, 255, 255, .2) !important;
+// }
 
 .app {
   // height: 100%;
@@ -95,21 +109,22 @@ $icon-size: 35px;
     }
   }
 
-  main {
-    padding: 24px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    header {
-      margin-bottom: 40px;
-      border-bottom: 1px solid #efefef;
-      h1 {
-        display: flex;
-        align-items: center;
-        transform: translateX(-20px);
-      }
-    }
+  // main {
+    // width: 100%;
+    // padding: 24px;
+    // flex-grow: 1;
+    // display: flex;
+    // flex-direction: column;
+    // overflow-y: auto;
+    // header {
+    //   margin-bottom: 40px;
+    //   border-bottom: 1px solid #efefef;
+    //   h1 {
+    //     display: flex;
+    //     align-items: center;
+    //     transform: translateX(-20px);
+    //   }
+    // }
 
     // footer {
     //   margin-top: auto;
@@ -123,7 +138,7 @@ $icon-size: 35px;
     //     }
     //   }
     // }
-  }
+  // }
 
   .block {
     display: flex;

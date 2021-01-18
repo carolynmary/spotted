@@ -1,16 +1,14 @@
 import React from "react";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row } from "../components/Grid";
 
-function Feed() {
+function Clinic() {
   return (
-    <Container fluid>
-      <Row>
-        <Col size="md-12">
-          <h1>CLINIC</h1>
-        </Col>
-      </Row>
-    </Container>
+    <Row>
+      <Col size="md-12">
+        <h1>CLINIC</h1>
+      </Col>
+    </Row>
   );
 }
 
-export default Feed;
+export default Clinic;

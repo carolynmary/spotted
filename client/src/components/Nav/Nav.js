@@ -36,13 +36,14 @@ const Nav = ({ collapsed, handleCollapsedChange }) => {
 		  <Menu iconShape="circle">
 			<MenuItem icon={<Bird />} >Spottings<Link to="/feed" /></MenuItem>
 			<MenuItem icon={<Map />}>Map<Link to="/map" /></MenuItem>
+			<MenuItem icon={<Info />}>Info<Link to="/info" /></MenuItem>
 			<MenuItem icon={<Connect />}>Connect<Link to="/connect" /></MenuItem>
 			<MenuItem icon={<Clinic />}>Clinic<Link to="/clinic" /></MenuItem>
-			<MenuItem icon={<Info />}>Info<Link to="/info" /></MenuItem>
 			<SubMenu icon={<Profile />} title={"Profile"} >
 			  <MenuItem>My Feed</MenuItem>
 			  <MenuItem>Settings</MenuItem>
 			</SubMenu>
+			<MenuItem >Signup<Link to="/signup" /></MenuItem>
 		  </Menu>
 		</SidebarContent>
   
