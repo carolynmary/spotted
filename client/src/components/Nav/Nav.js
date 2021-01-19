@@ -2,7 +2,6 @@ import React from 'react';
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarContent } from 'react-pro-sidebar';
 import Switch from 'react-switch';
 import { Link } from 'react-router-dom';
-
 import Bird from "../Icons/Bird"
 import Map from "../Icons/Map"
 import Clinic from "../Icons/Clinic"
@@ -40,7 +39,7 @@ const Nav = ({ collapsed, handleCollapsedChange }) => {
 			<MenuItem icon={<Connect />}>Connect<Link to="/connect" /></MenuItem>
 			<MenuItem icon={<Clinic />}>Clinic<Link to="/clinic" /></MenuItem>
 			<SubMenu icon={<Profile />} title={"Profile"} >
-			  <MenuItem>My Feed</MenuItem>
+			  <MenuItem>My Spottings</MenuItem>
 			  <MenuItem>Settings</MenuItem>
 			</SubMenu>
 			<MenuItem >Signup<Link to="/signup" /></MenuItem>
