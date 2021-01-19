@@ -11,7 +11,10 @@
     "seed": "node utils/seedDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "leaflet": "^1.7.1",
+    "node-sass": "^4.0.0",
+    "react-leaflet": "^3.0.5"
   },
   "author": "",
   "license": "ISC",
@@ -26,9 +29,11 @@
     "express-session": "^1.17.1",
     "formidable": "^1.2.2",
     "if-env": "^1.0.4",
+    "leaflet": "^1.7.1",
     "mongoose": "^5.3.16",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "react-leaflet": "^3.0.5"
   }
 }
