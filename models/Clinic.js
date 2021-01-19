@@ -6,7 +6,7 @@ const formidable = require("formidable");
 // clinicSchema
 const clinicSchema = new Schema({
 	name: { type: String, required: true },
-    location: { type: Point, required: true },
+    location: { type: "Point", required: true },
     phone: { type: String, required: true}
 });
 
