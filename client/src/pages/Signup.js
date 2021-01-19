@@ -7,10 +7,10 @@ import { Input, FormBtn } from "../components/Form";
 
 class Signup extends Component {
   state = {
-    email: "1@1",
-    username: "one",
-    password: "1",
-    passwordConf: "1"
+    email: "email@address.com",
+    username: "username",
+    password: "password",
+    passwordConf: "password"
   };
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class Signup extends Component {
         .then(res => {
           if(res.status === 200 ){
             this.props.authenticate();
-            return <Redirect to="/comments" />
+            return <Redirect to="/post" /> 
           }
         })
         .catch(err => console.log(err.response.data));
@@ -83,7 +83,7 @@ class Signup extends Component {
               >
                 signup
               </FormBtn>
-              <Link to="/">
+              <Link to="/login">
                <FormBtn> Login </FormBtn>
              </Link>
             </form>
@@ -91,8 +91,7 @@ class Signup extends Component {
           
         </Row>
         {/* redirect on authenticated */}
-        {this.props.authenticated ? <Redirect to='/comments'/>: <div></div>}
-
+        {this.props.authenticated ? <Redirect to='/feed'/>: <div></div>}
 
       </Container>
     );

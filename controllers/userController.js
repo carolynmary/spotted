@@ -9,7 +9,7 @@ module.exports = {
          _id: req.user._id,
          username: req.user.username,
          email: req.user.email,
-         comments: req.user.comments
+         // comments: req.user.comments
       });
    },
 
@@ -29,7 +29,7 @@ module.exports = {
    // to be implemented in the front end
    logout: function(req, res)  {
 		req.logout();
-		res.redirect("/");
+		res.redirect("/login");
    },
    
    authenticate: function( req, res) {
@@ -42,7 +42,7 @@ module.exports = {
                _id: req.user._id,
                username: req.user.username,
                email: req.user.email,
-               comments: req.user.comments
+               // comments: req.user.comments
          })
    }
 }

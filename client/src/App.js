@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import Comments from "./pages/Comments";
+// import Comments from "./pages/Comments";
 import { Container } from "./components/Grid";
-import Comment from "./pages/Comment";
+// import Comment from "./pages/Comment";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
@@ -17,7 +17,7 @@ import Connect from "./pages/Connect";
 import Info from "./pages/Info";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
-import MyFeed from "./pages/MyFeed";
+import Post from "./pages/Post";
 import "./App.scss";
 
 function App() {
@@ -43,12 +43,33 @@ function App() {
 		setCollapsed(checked);
 	};
 
+	const handleLogoutSubmit = event => {
+		event.preventDefault();
+		if (this.state.email && this.state.password) {
+		  userAPI.logout({
+			username: this.state.username,
+			email: this.state.email,
+			password: this.state.password,
+			passwordConf: this.state.passwordConf,
+	
+		  })
+			.then(res => {
+			  if(res.status === 200 ){
+				this.props.authenticate();
+				return <Redirect to="/post" /> 
+			  }
+			})
+			.catch(err => console.log(err.response.data));
+		}
+	  };
+
 	return (
 		<Router>
 			<Container>
 				<Nav className={`app`}
 					collapsed={collapsed}
 					handleCollapsedChange={handleCollapsedChange}
+					handleLogoutSubmit={handleLogoutSubmit}
 				/>
 				<main className="mainOverrides">
 					<Head />
@@ -65,10 +86,12 @@ function App() {
 							<Signup {...props} authenticate={authenticate} user={userState} />
 						)} />
 
-						<Route exact path='/login' component={Login} />
-
-						<ProtectedRoute exact path='/myfeed' >
-							<MyFeed {...userState} />
+						{/* <Route exact path='/login' component={Login} /> */}
+						<Route exact path='/login' render={props => (
+							<Login {...props} userState={userState} setUserState={setUserState} />
+						)} />
+						<ProtectedRoute exact path='/post' >
+							<Post {...userState} />
 						</ProtectedRoute>
 
 						<ProtectedRoute exact path='/settings' >
@@ -76,34 +99,16 @@ function App() {
 						</ProtectedRoute>
 
 						<Route component={NoMatch} />
-
-
-
-
-						{/* boilerplate routes */}
-						<Route exact path='/' render={props => (
-							<Login {...props} userState={userState} setUserState={setUserState} />
-						)} />
-						<Route exact path='/signup' render={props => (
-							<Signup {...props} authenticate={authenticate} user={userState} />
-						)} />
-
-						<ProtectedRoute exact path={["/", "/comments"]}>
-							<Comments {...userState} />
-						</ProtectedRoute>
-
-						<ProtectedRoute exact path='/comments/:id' >
-							<Comment {...userState} />
-						</ProtectedRoute>
-
-						<Route component={NoMatch} />
 					</Switch>
 				</main>
 
 			</Container>
-			{ userState.email ? <Redirect to="/comments" /> : <></>}
 		</Router>
 	);
 }
 
 export default App;
+
+
+// { userState.email ? <Redirect to="/feed" /> : <></>}
+

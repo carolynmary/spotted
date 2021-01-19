@@ -10,27 +10,27 @@ function Comments({ username }) {
 	// Setting our component's initial state
 	const [comments, setComments] = useState([]);
 	const [formObject, setFormObject] = useState({
-      body: "",
-      username: ""
-   });
-   
-   // get input element ref for focus
-   const titleInputElRef = useRef();
+		body: "",
+		username: ""
+	});
+
+	// get input element ref for focus
+	const titleInputElRef = useRef();
 
 	// Load all comments and store them with setComments
 	useEffect(() => {
-      // set user after successful component mount
-      setFormObject({
-         body: "",
-         username: "", 
-         username})
+		// set user after successful component mount
+		setFormObject({
+			body: "",
+			username: "",
+		})
 
-      loadComments();
+		loadComments();
 
-      // focus on titleInputEl if ref exists
-      titleInputElRef.current.focus()
-   }, [username]);
-   
+		// focus on titleInputEl if ref exists
+		titleInputElRef.current.focus()
+	}, [username]);
+
 
 	// Loads all comments and sets them to comments
 	function loadComments() {
@@ -61,11 +61,11 @@ function Comments({ username }) {
 				body: formObject.body,
 				username: formObject.username,
 			})
-            .then(loadComments)
-            .then(() => setFormObject({
-               body: "",
-               username: ""
-            }))
+				.then(loadComments)
+				.then(() => setFormObject({
+					body: "",
+					username: ""
+				}))
 				.catch((err) => console.log(err));
 		}
 	}
@@ -75,7 +75,7 @@ function Comments({ username }) {
 			<Col size='md-12'>
 				<form>
 					<Col size='sm-12'>
-						<ForwardRefInput ref={ titleInputElRef } value={formObject.body} onChange={handleInputChange} name='body' placeholder='your comment here' />
+						<ForwardRefInput ref={titleInputElRef} value={formObject.body} onChange={handleInputChange} name='body' placeholder='your comment here' />
 					</Col>
 					<FormBtn
 						disabled={!formObject.body}
@@ -106,8 +106,8 @@ function Comments({ username }) {
 						))}
 					</Table>
 				) : (
-					<h3>No Results to Display</h3>
-				)}
+						<h3>No Results to Display</h3>
+					)}
 			</Col>
 		</Row>,
 	</>;
