@@ -1,6 +1,12 @@
+// change comment to Post, change user to Users etc. 
+
+
 const mongoose = require("mongoose");
 const db = require("../models");
 const { mongoOptions } = require("./config")
+const userSeed = require("./userSeed.json")
+const postSeed = require("./postSeed.json")
+const clinicSeed = require("./clinicSeed.json")
 
 // This file empties the Books collection and inserts the books below
 

@@ -1,7 +1,7 @@
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const formidable = require("formidable");
+// const formidable = require("formidable");
 
 // clinicSchema
 const clinicSchema = new Schema({
@@ -10,7 +10,7 @@ const clinicSchema = new Schema({
     phone: { type: String, required: true}
 });
 
-const Post = mongoose.model("Clinic", clinicSchema);
+const Clinic = mongoose.model("Clinic", clinicSchema);
 
 module.exports = Clinic;
 
