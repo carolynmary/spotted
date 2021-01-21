@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import userAPI from "../utils/userAPI";
 import { Redirect } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { Input, FormBtn } from "../components/Form";
+import { Col, Row } from "../components/Grid";
+import { Input, FormBtn, FormBtnSecondary } from "../components/Form";
 
 class Signup extends Component {
   state = {
@@ -22,6 +22,7 @@ class Signup extends Component {
     });
   };
 
+  // WHY NOT REDIRECTING TO FEED??? ==========================================
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.email && this.state.password) {
@@ -49,9 +50,10 @@ class Signup extends Component {
 
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="12">
+      <Row className="full-width">
+        <Col size="12">
+
+          <div className="login-signup">
 
             <form>
               <Input
@@ -60,7 +62,6 @@ class Signup extends Component {
                 name="username"
                 placeholder="username"
               />
-
               <Input
                 value={this.state.email}
                 onChange={this.handleInputChange}
@@ -82,26 +83,27 @@ class Signup extends Component {
                 type="password"
               />
 
-              <FormBtn onClick={this.refreshPage}
-              > Cancel </FormBtn>
-
               <FormBtn
                 disabled={!(this.state.email && this.state.password)}
                 onClick={this.handleFormSubmit}
-              >
-                Signup
+              > Signup
               </FormBtn>
 
+              <FormBtnSecondary onClick={this.refreshPage}
+              > Cancel
+              </FormBtnSecondary>
+
+
             </form>
-          </Col>
+          </div>
 
-        </Row>
-        {/* redirect on authenticated */}
-        {this.props.authenticated ? <Redirect to='/feed' /> : <div></div>}
+        </Col>
 
-      </Container>
+      </Row>
     );
   }
 }
 
 export default Signup;
+// {/* redirect on authenticated */}
+// {this.props.authenticated ? <Redirect to='/feed' /> : <div></div>}

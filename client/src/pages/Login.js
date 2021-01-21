@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-
 import userAPI from "../utils/userAPI";
 import { Link, Redirect } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { Input, FormBtn } from "../components/Form";
-
+import { Col, Row } from "../components/Grid";
+import { Input, FormBtn, FormBtnSecondary } from "../components/Form";
 class Login extends Component {
   state = {
     email: "",
@@ -22,6 +20,7 @@ class Login extends Component {
     });
   };
 
+  // WHY NOT REDIRECTING TO FEED??? ==========================================
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.email && this.state.password) {
@@ -32,9 +31,10 @@ class Login extends Component {
         .then(res => {
           if (res.status === 200) {
             this.props.setUserState(res.data);
-            return <Redirect to="/post" />
+            return <Redirect to="/feed" />
           }
         })
+        .then ( )
         .catch(err => console.log(err));
     }
   };
@@ -46,9 +46,11 @@ class Login extends Component {
 
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="12">
+        <Row className="full-width">
+          <Col size="12" >
+
+            <div className="login-signup">
+
             <form>
               <Input
                 value={this.state.email}
@@ -63,22 +65,22 @@ class Login extends Component {
                 placeholder="password"
                 type="password"
               />
-
-              <FormBtn onClick={this.refreshPage}
-              > Cancel </FormBtn>
-
               <FormBtn
                 disabled={!(this.state.email && this.state.password)}
                 onClick={this.handleFormSubmit}
-              >
-                Log in
+              > Log in 
               </FormBtn>
+              <FormBtnSecondary onClick={this.refreshPage}
+              > Cancel 
+              </FormBtnSecondary>
             </form>
-            <p >Not a member? <Link to="/signup" className="form-link">Signup here.</Link></p>
+
+            <p >Not a member? <Link to="/signup">Signup here.</Link></p>
+
+            </div>
 
           </Col>
         </Row>
-      </Container>
     );
   }
 }

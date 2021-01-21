@@ -20,15 +20,29 @@ $icon-size: 35px;
   }
 }
 
-.form-link {
-  color: #2b49c8;
-}
-.form-link:hover {
-  color: #000;
+.navText {
+  margin-left: 35px;
+  font-size: 0.9rem;
+  text-align: left;
+  color: #ffffff;
 }
 
-.welcome {
-  margin: auto;
+#login {
+  .pro-inner-item {
+    margin-left: 35px;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 0.9rem;
+  }
+}
+
+#logout {
+  .pro-inner-item {
+    margin-left: 35px;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 0.9rem;
+  }
 }
 
 .pro-sidebar {
@@ -37,7 +51,6 @@ $icon-size: 35px;
   margin-left: -15px;
   width: 230px;
   min-width: 230px;
-  font-size: .9rem;
 }
 
 .pro-sidebar.collapsed {
@@ -57,7 +70,7 @@ $icon-size: 35px;
     margin-left: 13px;
   }
   p {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -65,8 +78,48 @@ $icon-size: 35px;
   margin-bottom: 20px;
 }
 
-// .react-switch-bg {
-//   background-color:rgba(255, 255, 255, .2) !important;
+.full-width {
+  width: 100% !important;
+}
+
+.login-signup {
+  width: 50%;
+  max-width: 430px;
+  min-width: 230px;
+  margin: auto;
+  padding-top: 100px;
+  button {
+    float: right;
+  }
+  .btn-dark-overrides {
+    background-color: #000 !important;
+    opacity: 1 !important;
+    border-color: #000 !important;
+    &:hover {
+      background-color: #fff !important;
+      color: #000;
+    }
+  }
+  .btn-secondary-overrides {
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+  p {
+    padding-top: 100px;
+    text-align: center;
+  }
+}
+
+// .btn-dark-overrides {
+//   background-color: #000 !important;
+//   opacity: 1 !important;
+//   border-color: #000 !important;
+//   &:hover {
+//     background-color: #fff !important;
+//     color: #000;
+//   }
 // }
 
 .app {
@@ -74,20 +127,20 @@ $icon-size: 35px;
   display: flex;
   position: relative;
 
-  //   .btn-toggle {
-  //     cursor: pointer;
-  //     width: 35px;
-  //     height: 35px;
-  //     background: #353535;
-  //     color: #fff;
-  //     text-align: center;
-  //     border-radius: 50%;
-  //     display: flex;
-  //     align-items: center;
-  //     justify-content: center;
-  //     font-size: 15px;
-  //     display: none;
-  //   }
+  // .btn-toggle {
+  //   cursor: pointer;
+  //   width: 35px;
+  //   height: 35px;
+  //   background: #353535;
+  //   color: #fff;
+  //   text-align: center;
+  //   border-radius: 50%;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   font-size: 15px;
+  //   display: none;
+  // }
 
   .sidebar-btn-wrapper {
     display: flex;

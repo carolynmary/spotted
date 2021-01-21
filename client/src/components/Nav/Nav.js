@@ -47,13 +47,13 @@ const Nav = ({ collapsed, handleCollapsedChange, handleLogoutSubmit, user }) => 
 					{
 						Object.keys(user).length === 0 ?
 						<div></div>
-						: <div className="welcome">Welcome <br/> {user.username} </div>
+						: <div className="navText">Hello {user.username}</div>
 					}
 
 					{
 						Object.keys(user).length === 0 ?
-						<MenuItem >Login<Link to="/login" /></MenuItem>
-						: <MenuItem onClick={handleLogoutSubmit}>Logout</MenuItem>
+						<MenuItem id="login">Login<Link to="/login" /></MenuItem>
+						: <MenuItem onClick={handleLogoutSubmit} id="logout">Logout</MenuItem>
 					}
 					
 				</Menu>
