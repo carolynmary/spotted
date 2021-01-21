@@ -5,7 +5,7 @@ function Post() {
   return (
     <Row>
       <Col size="md-12">
-        <h1>POST A SPOTTING</h1>
+        <h1>POST A SIGHTING</h1>
       </Col>
     </Row>
   );

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-// import Comments from "./pages/Comments";
 import { Container } from "./components/Grid";
-// import Comment from "./pages/Comment";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
@@ -15,7 +13,6 @@ import Map from "./pages/Map";
 import Clinic from "./pages/Clinic";
 import Connect from "./pages/Connect";
 import Info from "./pages/Info";
-import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Post from "./pages/Post";
 import "./App.scss";
@@ -45,23 +42,13 @@ function App() {
 
 	const handleLogoutSubmit = event => {
 		event.preventDefault();
-		if (this.state.email && this.state.password) {
-		  userAPI.logout({
-			username: this.state.username,
-			email: this.state.email,
-			password: this.state.password,
-			passwordConf: this.state.passwordConf,
-	
-		  })
-			.then(res => {
-			  if(res.status === 200 ){
-				this.props.authenticate();
-				return <Redirect to="/post" /> 
-			  }
-			})
-			.catch(err => console.log(err.response.data));
-		}
-	  };
+		try {
+			if (userState) {
+				setUserState({});
+				return <Redirect to="/login" />
+			}
+		} catch (e) { console.log(e) }
+	};
 
 	return (
 		<Router>
@@ -70,26 +57,30 @@ function App() {
 					collapsed={collapsed}
 					handleCollapsedChange={handleCollapsedChange}
 					handleLogoutSubmit={handleLogoutSubmit}
+					user={userState}
 				/>
 				<main className="mainOverrides">
 					<Head />
 					<Switch>
 						{/* spotted routes */}
 						<Route exact path={["/", "/feed"]} component={Feed} />
-						<Route exact path='/map' component={Map} />
-						<Route exact path='/info' component={Info} />
-						<Route exact path='/clinic' component={Clinic} />
-						<Route exact path='/connect' component={Connect} />
-						<Route exact path='/profile' component={Profile} />
 
-						<Route exact path='/signup' render={props => (
-							<Signup {...props} authenticate={authenticate} user={userState} />
-						)} />
+						<ProtectedRoute exact path='/map' >
+							<Map {...userState} />
+						</ProtectedRoute>
 
-						{/* <Route exact path='/login' component={Login} /> */}
-						<Route exact path='/login' render={props => (
-							<Login {...props} userState={userState} setUserState={setUserState} />
-						)} />
+						<ProtectedRoute exact path='/info' >
+							<Info {...userState} />
+						</ProtectedRoute>
+
+						<ProtectedRoute exact path='/clinic' >
+							<Clinic {...userState} />
+						</ProtectedRoute>
+
+						<ProtectedRoute exact path='/connect' >
+							<Connect {...userState} />
+						</ProtectedRoute>
+
 						<ProtectedRoute exact path='/post' >
 							<Post {...userState} />
 						</ProtectedRoute>
@@ -97,6 +88,14 @@ function App() {
 						<ProtectedRoute exact path='/settings' >
 							<Settings {...userState} />
 						</ProtectedRoute>
+
+						<Route exact path='/login' render={props => (
+							<Login {...props} userState={userState} setUserState={setUserState} />
+						)} />
+
+						<Route exact path='/signup' render={props => (
+							<Signup {...props} authenticate={authenticate} user={userState} />
+						)} />
 
 						<Route component={NoMatch} />
 					</Switch>
@@ -108,7 +107,3 @@ function App() {
 }
 
 export default App;
-
-
-// { userState.email ? <Redirect to="/feed" /> : <></>}
-

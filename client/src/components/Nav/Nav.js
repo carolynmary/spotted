@@ -9,7 +9,8 @@ import Connect from "../Icons/Connect"
 import Info from "../Icons/Info"
 import Profile from "../Icons/Profile"
 
-const Nav = ({ collapsed, handleCollapsedChange, handleLogoutSubmit }) => {
+const Nav = ({ collapsed, handleCollapsedChange, handleLogoutSubmit, user }) => {
+
 	return (
 		<ProSidebar
 			collapsed={collapsed}
@@ -42,8 +43,19 @@ const Nav = ({ collapsed, handleCollapsedChange, handleLogoutSubmit }) => {
 						<MenuItem>Add a Spotting<Link to="/post" /></MenuItem>
 						<MenuItem>Settings<Link to="/settings" /></MenuItem>
 					</SubMenu>
-					<MenuItem >Login/ <br /> Signup<Link to="/signup" /></MenuItem>
-					<MenuItem onClick={handleLogoutSubmit}>Logout</MenuItem>
+
+					{
+						Object.keys(user).length === 0 ?
+						<div></div>
+						: <div className="welcome">Welcome <br/> {user.username} </div>
+					}
+
+					{
+						Object.keys(user).length === 0 ?
+						<MenuItem >Login<Link to="/login" /></MenuItem>
+						: <MenuItem onClick={handleLogoutSubmit}>Logout</MenuItem>
+					}
+					
 				</Menu>
 			</SidebarContent>
 
@@ -52,3 +64,4 @@ const Nav = ({ collapsed, handleCollapsedChange, handleLogoutSubmit }) => {
 };
 
 export default Nav;
+

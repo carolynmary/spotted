@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 
 import userAPI from "../utils/userAPI";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
 
 class Login extends Component {
   state = {
-      email: "",
-      password: ""
-    };
-    
+    email: "",
+    password: ""
+  };
+
   componentDidMount() {
- 
+
   }
-  
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -30,13 +30,19 @@ class Login extends Component {
         password: this.state.password
       })
         .then(res => {
-          if(res.status === 200 ){
-             this.props.setUserState(res.data)
+          if (res.status === 200) {
+            this.props.setUserState(res.data);
+            return <Redirect to="/post" />
           }
         })
         .catch(err => console.log(err));
     }
   };
+
+  refreshPage = event => {
+    event.preventDefault();
+    window.location.reload();
+  }
 
   render() {
     return (
@@ -57,17 +63,19 @@ class Login extends Component {
                 placeholder="password"
                 type="password"
               />
-              
+
+              <FormBtn onClick={this.refreshPage}
+              > Cancel </FormBtn>
+
               <FormBtn
                 disabled={!(this.state.email && this.state.password)}
                 onClick={this.handleFormSubmit}
               >
                 Log in
               </FormBtn>
-             <Link to="/signup">
-               <FormBtn> Signup </FormBtn>
-             </Link>
             </form>
+            <p >Not a member? <Link to="/signup" className="form-link">Signup here.</Link></p>
+
           </Col>
         </Row>
       </Container>

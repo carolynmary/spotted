@@ -1,21 +1,20 @@
 import React, { Component } from "react";
-
 import userAPI from "../utils/userAPI";
-import {  Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
 
 class Signup extends Component {
   state = {
-    email: "email@address.com",
-    username: "username",
-    password: "password",
-    passwordConf: "password"
+    email: "",
+    username: "",
+    password: "",
+    passwordConf: ""
   };
 
   componentDidMount() {
   }
-  
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -34,64 +33,71 @@ class Signup extends Component {
 
       })
         .then(res => {
-          if(res.status === 200 ){
+          if (res.status === 200) {
             this.props.authenticate();
-            return <Redirect to="/post" /> 
+            return <Redirect to="/feed" />
           }
         })
         .catch(err => console.log(err.response.data));
     }
   };
 
+  refreshPage = event => {
+    event.preventDefault();
+    window.location.reload();
+  }
+
   render() {
     return (
       <Container fluid>
         <Row>
           <Col size="12">
- 
+
             <form>
               <Input
                 value={this.state.username}
                 onChange={this.handleInputChange}
                 name="username"
-                placeholder="username (required)"
+                placeholder="username"
               />
+
               <Input
                 value={this.state.email}
                 onChange={this.handleInputChange}
                 name="email"
-                placeholder="email (required)"
+                placeholder="email"
               />
               <Input
                 value={this.state.password}
                 onChange={this.handleInputChange}
                 name="password"
-                placeholder="(required)"
+                placeholder="password"
                 type="password"
               />
               <Input
                 value={this.state.passwordConf}
                 onChange={this.handleInputChange}
                 name="passwordConf"
-                placeholder="(required)"
+                placeholder="confirm password"
                 type="password"
               />
-              
+
+              <FormBtn onClick={this.refreshPage}
+              > Cancel </FormBtn>
+
               <FormBtn
-                // disabled={!(this.state.email && this.state.password)}
+                disabled={!(this.state.email && this.state.password)}
                 onClick={this.handleFormSubmit}
               >
-                signup
+                Signup
               </FormBtn>
-              <Link to="/login">
-               <FormBtn> Login </FormBtn>
-             </Link>
+
             </form>
           </Col>
-          
+
         </Row>
         {/* redirect on authenticated */}
-        {this.props.authenticated ? <Redirect to='/feed'/>: <div></div>}
+        {this.props.authenticated ? <Redirect to='/feed' /> : <div></div>}
 
       </Container>
     );
