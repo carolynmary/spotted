@@ -10,7 +10,7 @@ const postSchema = new Schema({
 	species: { type: String },
 	body: { type: String },
 	date: { type: Date, default: Date.now },
-	location: { type: Point, required: true },
+	location: { type: "Point", required: true },
 });
 
 const Post = mongoose.model("Post", postSchema);
