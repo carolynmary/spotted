@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import userAPI from "../utils/userAPI";
-import { Redirect } from "react-router-dom";
 import { Col, Row } from "../components/Grid";
 import { Input, FormBtn, FormBtnSecondary } from "../components/Form";
 
@@ -22,7 +21,6 @@ class Signup extends Component {
     });
   };
 
-  // WHY NOT REDIRECTING TO FEED??? ==========================================
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.email && this.state.password) {
@@ -36,7 +34,7 @@ class Signup extends Component {
         .then(res => {
           if (res.status === 200) {
             this.props.authenticate();
-            return <Redirect to="/feed" />
+            this.props.history.push("/feed");
           }
         })
         .catch(err => console.log(err.response.data));

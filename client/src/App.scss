@@ -10,9 +10,20 @@ $icon-size: 35px;
 
 @import "~react-pro-sidebar/dist/scss/styles.scss";
 
+@media (max-width: 576px) {
+  .pro-sidebar.sm.collapsed {
+    left: -105px;
+  }
+}
+@media (max-width: 576px) {
+  .pro-sidebar.sm.toggled {
+    left: 0;
+    height: 100vh;
+  }
+}
+
 .mainOverrides {
   width: 100%;
-  padding-left: 15px;
   margin-top: -16px;
   .row {
     margin-right: 0;
@@ -48,7 +59,6 @@ $icon-size: 35px;
 .pro-sidebar {
   height: auto;
   margin-top: -16px;
-  margin-left: -15px;
   width: 230px;
   min-width: 230px;
 }
@@ -112,61 +122,24 @@ $icon-size: 35px;
   }
 }
 
-// .btn-dark-overrides {
-//   background-color: #000 !important;
-//   opacity: 1 !important;
-//   border-color: #000 !important;
-//   &:hover {
-//     background-color: #fff !important;
-//     color: #000;
-//   }
-// }
-
 .app {
-  // height: 100%;
-  display: flex;
-  position: relative;
-
-  // .btn-toggle {
-  //   cursor: pointer;
-  //   width: 35px;
-  //   height: 35px;
-  //   background: #353535;
-  //   color: #fff;
-  //   text-align: center;
-  //   border-radius: 50%;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   font-size: 15px;
-  //   display: none;
-  // }
-
-  .sidebar-btn-wrapper {
+  .btn-toggle {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    background: #353535;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    .sidebar-btn {
-      padding: 1px 15px;
-      border-radius: 40px;
-      background: rgba(255, 255, 255, 0.05);
-      color: #adadad;
-      text-decoration: none;
-      margin: 0 auto;
-      height: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      span {
-        margin-left: 5px;
-        font-size: 13px;
-      }
-      &:hover {
-        color: $highlight-color;
-      }
-    }
+    font-size: 15px;
+    display: none;
+    float: left;
+    position: absolute;
+    left: 15px;
+    top: 15px;
   }
 
   .collapsed {
@@ -179,37 +152,6 @@ $icon-size: 35px;
       padding: 0;
     }
   }
-
-  // main {
-  // width: 100%;
-  // padding: 24px;
-  // flex-grow: 1;
-  // display: flex;
-  // flex-direction: column;
-  // overflow-y: auto;
-  // header {
-  //   margin-bottom: 40px;
-  //   border-bottom: 1px solid #efefef;
-  //   h1 {
-  //     display: flex;
-  //     align-items: center;
-  //     transform: translateX(-20px);
-  //   }
-  // }
-
-  // footer {
-  //   margin-top: auto;
-  //   color: #888;
-  //   text-align: center;
-  //   a {
-  //     text-decoration: none;
-  //     color: #888;
-  //     &:hover {
-  //       text-decoration: underline;
-  //     }
-  //   }
-  // }
-  // }
 
   .block {
     display: flex;
@@ -229,7 +171,7 @@ $icon-size: 35px;
       }
     }
   }
-  @media (max-width: $breakpoint-md) {
+  @media (max-width: $breakpoint-sm) {
     .btn-toggle {
       display: flex;
     }

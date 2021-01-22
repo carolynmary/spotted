@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import userAPI from "../utils/userAPI";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Col, Row } from "../components/Grid";
 import { Input, FormBtn, FormBtnSecondary } from "../components/Form";
 class Login extends Component {
@@ -20,7 +20,6 @@ class Login extends Component {
     });
   };
 
-  // WHY NOT REDIRECTING TO FEED??? ==========================================
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.email && this.state.password) {
@@ -28,13 +27,12 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       })
-        .then(res => {
-          if (res.status === 200) {
-            this.props.setUserState(res.data);
-            return <Redirect to="/feed" />
+      .then(res => {
+        if (res.status === 200) {
+          this.props.setUserState(res.data);
+          this.props.history.push("/feed");
           }
         })
-        .then ( )
         .catch(err => console.log(err));
     }
   };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "./components/Grid";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -20,6 +20,7 @@ import "./App.scss";
 function App() {
 	const [userState, setUserState] = useState({});
 	const [collapsed, setCollapsed] = useState(true);
+	const [toggled, setToggled] = useState(false);
 
 	useEffect(() => {
 		// auth user on first render
@@ -36,35 +37,42 @@ function App() {
 			.catch((err) => console.log('registered user:', err.response));
 	}
 
-	const handleCollapsedChange = (checked) => {
-		setCollapsed(checked);
+	const handleCollapsedChange = (nextChecked) => {
+		console.log("COLLAPSED: ", collapsed);
+		console.log("NEXT: ", nextChecked);
+		setCollapsed(nextChecked);
+	};
+
+	const handleToggleSidebar = (value) => {
+		setToggled({ value });
+		setCollapsed(false);
 	};
 
 	const handleLogoutSubmit = event => {
 		event.preventDefault();
-		try {
-			if (userState) {
-				setUserState({});
-				return <Redirect to="/login" />
-			}
-		} catch (e) { console.log(e) }
+		return userAPI.logout(userState)
+			.then(window.location.replace("/login"))
+			.catch(err => console.log(err));
 	};
 
 	return (
 		<Router>
 			<Container>
-				<Nav className={`app`}
+				<Nav className={`app ${toggled ? 'toggled' : ''}`}
 					collapsed={collapsed}
+					toggled={toggled}
 					handleCollapsedChange={handleCollapsedChange}
+					handleToggleSidebar={handleToggleSidebar}
 					handleLogoutSubmit={handleLogoutSubmit}
 					user={userState}
+					setUserState={setUserState}
 				/>
-				<main className="mainOverrides">
-					<Head />
+				<main className={`mainOverrides app ${toggled ? 'toggled' : ''}`}>
+					<Head
+						toggled={toggled}
+						handleToggleSidebar={handleToggleSidebar}
+					/>
 					<Switch>
-						{/* spotted routes */}
-						<Route exact path={["/", "/feed"]} component={Feed} />
-
 						<ProtectedRoute exact path='/map' >
 							<Map {...userState} />
 						</ProtectedRoute>
@@ -96,6 +104,8 @@ function App() {
 						<Route exact path='/signup' render={props => (
 							<Signup {...props} authenticate={authenticate} user={userState} />
 						)} />
+
+						<Route exact path={["/", "/feed"]} component={Feed} />
 
 						<Route component={NoMatch} />
 					</Switch>

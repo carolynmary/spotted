@@ -9,11 +9,13 @@ import Connect from "../Icons/Connect"
 import Info from "../Icons/Info"
 import Profile from "../Icons/Profile"
 
-const Nav = ({ collapsed, handleCollapsedChange, handleLogoutSubmit, user }) => {
-
+const Nav = ({ collapsed, toggled, handleCollapsedChange, handleToggleSidebar, handleLogoutSubmit, user }) => {
 	return (
 		<ProSidebar
 			collapsed={collapsed}
+			toggled={toggled}
+			breakPoint="sm"
+			onToggle={handleToggleSidebar}
 		>
 
 			<SidebarHeader>
@@ -25,7 +27,7 @@ const Nav = ({ collapsed, handleCollapsedChange, handleLogoutSubmit, user }) => 
 						uncheckedIcon={false}
 						onChange={handleCollapsedChange}
 						checked={collapsed}
-						onColor="#219de9"
+						onColor="#2b49c8"
 						offColor="#bbbbbb"
 					/>
 					<p>collapsed</p>
@@ -40,22 +42,22 @@ const Nav = ({ collapsed, handleCollapsedChange, handleLogoutSubmit, user }) => 
 					<MenuItem icon={<Connect />}>Connect<Link to="/connect" /></MenuItem>
 					<MenuItem icon={<Clinic />}>Clinic<Link to="/clinic" /></MenuItem>
 					<SubMenu icon={<Profile />} title={"Profile"} >
-						<MenuItem>Add a Spotting<Link to="/post" /></MenuItem>
+						<MenuItem>Post a Sighting<Link to="/post" /></MenuItem>
 						<MenuItem>Settings<Link to="/settings" /></MenuItem>
 					</SubMenu>
 
 					{
 						Object.keys(user).length === 0 ?
-						<div></div>
-						: <div className="navText">Hello {user.username}</div>
+							<div></div>
+							: <div className="navText">Hello {user.username}</div>
 					}
 
 					{
 						Object.keys(user).length === 0 ?
-						<MenuItem id="login">Login<Link to="/login" /></MenuItem>
-						: <MenuItem onClick={handleLogoutSubmit} id="logout">Logout</MenuItem>
+							<MenuItem id="login">Login<Link to="/login" /></MenuItem>
+							: <MenuItem onClick={handleLogoutSubmit} id="logout">Logout</MenuItem>
 					}
-					
+
 				</Menu>
 			</SidebarContent>
 
