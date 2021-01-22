@@ -49,7 +49,7 @@ class Login extends Component {
 
             <div className="login-signup">
 
-            <form>
+            <form autoComplete="off"> 
               <Input
                 value={this.state.email}
                 onChange={this.handleInputChange}

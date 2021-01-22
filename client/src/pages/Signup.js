@@ -52,8 +52,7 @@ class Signup extends Component {
         <Col size="12">
 
           <div className="login-signup">
-
-            <form>
+            <form autoComplete="off">
               <Input
                 value={this.state.username}
                 onChange={this.handleInputChange}
@@ -90,13 +89,10 @@ class Signup extends Component {
               <FormBtnSecondary onClick={this.refreshPage}
               > Cancel
               </FormBtnSecondary>
-
-
             </form>
           </div>
 
         </Col>
-
       </Row>
     );
   }

@@ -36,6 +36,8 @@ $icon-size: 35px;
   font-size: 0.9rem;
   text-align: left;
   color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #login {

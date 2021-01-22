@@ -13,5 +13,4 @@ export default {
   logout: function (user) {
     return axios.get("/api/user/logout", user)
   }
-
 };

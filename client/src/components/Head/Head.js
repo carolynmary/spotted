@@ -12,7 +12,7 @@ const Head = ({ handleToggleSidebar }) => {
 		<Row>
 			<Col size="12">
 				{/* hamburger */}
-				<div className="btn-toggle hamburger" onClick={() => handleToggleSidebar(true)}>
+				<div className="btn-toggle" onClick={() => handleToggleSidebar(true)}>
 					<FaBars />
 				</div>
 

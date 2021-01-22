@@ -44,6 +44,8 @@ function App() {
 	};
 
 	const handleToggleSidebar = (value) => {
+		console.log("TOGGLED: ", toggled);
+		console.log("(next) VALUE: ", value);
 		setToggled({ value });
 		setCollapsed(false);
 	};
@@ -60,14 +62,13 @@ function App() {
 			<Container>
 				<Nav className={`app ${toggled ? 'toggled' : ''}`}
 					collapsed={collapsed}
-					toggled={toggled}
 					handleCollapsedChange={handleCollapsedChange}
+					toggled={toggled}
 					handleToggleSidebar={handleToggleSidebar}
 					handleLogoutSubmit={handleLogoutSubmit}
 					user={userState}
-					setUserState={setUserState}
 				/>
-				<main className={`mainOverrides app ${toggled ? 'toggled' : ''}`}>
+				<main className="mainOverrides app">
 					<Head
 						toggled={toggled}
 						handleToggleSidebar={handleToggleSidebar}
