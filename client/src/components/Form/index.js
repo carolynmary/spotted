@@ -30,7 +30,18 @@ export function FormBtn(props) {
 		<button
 			{...props}
 			style={{ marginLeft: 10 }}
-			className='btn btn-dark rounded-0'>
+			className='btn-dark-overrides btn btn-dark rounded-3'>
+			{props.children}
+		</button>
+	);
+}
+
+export function FormBtnSecondary(props) {
+	return (
+		<button
+			{...props}
+			style={{ marginLeft: 10 }}
+			className='btn-secondary-overrides btn btn-secondary rounded-3'>
 			{props.children}
 		</button>
 	);

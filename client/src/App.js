@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import Comments from "./pages/Comments";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "./components/Grid";
-import Comment from "./pages/Comment";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
@@ -15,14 +13,14 @@ import Map from "./pages/Map";
 import Clinic from "./pages/Clinic";
 import Connect from "./pages/Connect";
 import Info from "./pages/Info";
-import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
-import MyFeed from "./pages/MyFeed";
+import Post from "./pages/Post";
 import "./App.scss";
 
 function App() {
 	const [userState, setUserState] = useState({});
 	const [collapsed, setCollapsed] = useState(true);
+	const [toggled, setToggled] = useState(false);
 
 	useEffect(() => {
 		// auth user on first render
@@ -39,69 +37,82 @@ function App() {
 			.catch((err) => console.log('registered user:', err.response));
 	}
 
-	const handleCollapsedChange = (checked) => {
-		setCollapsed(checked);
+	const handleCollapsedChange = (nextChecked) => {
+		console.log("COLLAPSED: ", collapsed);
+		console.log("NEXT: ", nextChecked);
+		setCollapsed(nextChecked);
+	};
+
+	const handleToggleSidebar = (value) => {
+		console.log("TOGGLED: ", toggled);
+		console.log("(next) VALUE: ", value);
+		setToggled({ value });
+		setCollapsed(false);
+	};
+
+	const handleLogoutSubmit = event => {
+		event.preventDefault();
+		return userAPI.logout(userState)
+			.then(window.location.replace("/login"))
+			.catch(err => console.log(err));
 	};
 
 	return (
 		<Router>
 			<Container>
-				<Nav className={`app`}
+				<Nav className={`app ${toggled ? 'toggled' : ''}`}
 					collapsed={collapsed}
 					handleCollapsedChange={handleCollapsedChange}
+					toggled={toggled}
+					handleToggleSidebar={handleToggleSidebar}
+					handleLogoutSubmit={handleLogoutSubmit}
+					user={userState}
 				/>
-				<main className="mainOverrides">
-					<Head />
+				<main className="mainOverrides app">
+					<Head
+						toggled={toggled}
+						handleToggleSidebar={handleToggleSidebar}
+					/>
 					<Switch>
-						{/* spotted routes */}
-						<Route exact path={["/", "/feed"]} component={Feed} />
-						<Route exact path='/map' component={Map} />
-						<Route exact path='/info' component={Info} />
-						<Route exact path='/clinic' component={Clinic} />
-						<Route exact path='/connect' component={Connect} />
-						<Route exact path='/profile' component={Profile} />
+						<ProtectedRoute exact path='/map' >
+							<Map {...userState} />
+						</ProtectedRoute>
 
-						<Route exact path='/signup' render={props => (
-							<Signup {...props} authenticate={authenticate} user={userState} />
-						)} />
+						<ProtectedRoute exact path='/info' >
+							<Info {...userState} />
+						</ProtectedRoute>
 
-						<Route exact path='/login' component={Login} />
+						<ProtectedRoute exact path='/clinic' >
+							<Clinic {...userState} />
+						</ProtectedRoute>
 
-						<ProtectedRoute exact path='/myfeed' >
-							<MyFeed {...userState} />
+						<ProtectedRoute exact path='/connect' >
+							<Connect {...userState} />
+						</ProtectedRoute>
+
+						<ProtectedRoute exact path='/post' >
+							<Post {...userState} />
 						</ProtectedRoute>
 
 						<ProtectedRoute exact path='/settings' >
 							<Settings {...userState} />
 						</ProtectedRoute>
 
-						<Route component={NoMatch} />
-
-
-
-
-						{/* boilerplate routes */}
-						<Route exact path='/' render={props => (
+						<Route exact path='/login' render={props => (
 							<Login {...props} userState={userState} setUserState={setUserState} />
 						)} />
+
 						<Route exact path='/signup' render={props => (
 							<Signup {...props} authenticate={authenticate} user={userState} />
 						)} />
 
-						<ProtectedRoute exact path={["/", "/comments"]}>
-							<Comments {...userState} />
-						</ProtectedRoute>
-
-						<ProtectedRoute exact path='/comments/:id' >
-							<Comment {...userState} />
-						</ProtectedRoute>
+						<Route exact path={["/", "/feed"]} component={Feed} />
 
 						<Route component={NoMatch} />
 					</Switch>
 				</main>
 
 			</Container>
-			{ userState.email ? <Redirect to="/comments" /> : <></>}
 		</Router>
 	);
 }

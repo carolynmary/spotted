@@ -1,14 +1,14 @@
 import React from "react";
 import { Col, Row } from "../components/Grid";
 
-function MyFeed() {
+function Post() {
   return (
     <Row>
       <Col size="md-12">
-        <h1>MY FEED</h1>
+        <h1>POST A SIGHTING</h1>
       </Col>
     </Row>
   );
 }
 
-export default MyFeed;
+export default Post;

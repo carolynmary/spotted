@@ -8,11 +8,11 @@ router.route("/login")
 	// Using the passport.authenticate middleware with our local strategy.
 	// If the user has valid login credentials, send them to the members page.
 	// Otherwise the user will be sent an error
-	.post( passport.authenticate("local"), userController.login);
+	.post(passport.authenticate("local"), userController.login);
 
 // Matches with "/api/user/signup"
 router.route("/signup")
-   .post( userController.signup );
+	.post(userController.signup);
 
 // Matches with "/api/user/logout"
 router.route("/logout")
@@ -22,6 +22,6 @@ router.route("/logout")
 // Matches with "/api/user/authenticate"
 router.route("/authenticate")
 	// Route for getting some data about our user to be used client side
-   .post( userController.authenticate);
- 
+	.post(userController.authenticate);
+
 module.exports = router;

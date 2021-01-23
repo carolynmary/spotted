@@ -1,20 +1,18 @@
 import React, { Component } from "react";
-
 import userAPI from "../utils/userAPI";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { Input, FormBtn } from "../components/Form";
-
+import { Col, Row } from "../components/Grid";
+import { Input, FormBtn, FormBtnSecondary } from "../components/Form";
 class Login extends Component {
   state = {
-      email: "",
-      password: ""
-    };
-    
+    email: "",
+    password: ""
+  };
+
   componentDidMount() {
- 
+
   }
-  
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -29,48 +27,58 @@ class Login extends Component {
         email: this.state.email,
         password: this.state.password
       })
-        .then(res => {
-          if(res.status === 200 ){
-             this.props.setUserState(res.data)
+      .then(res => {
+        if (res.status === 200) {
+          this.props.setUserState(res.data);
+          this.props.history.push("/feed");
           }
         })
         .catch(err => console.log(err));
     }
   };
 
+  refreshPage = event => {
+    event.preventDefault();
+    window.location.reload();
+  }
+
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="12">
-            <form>
+        <Row className="full-width">
+          <Col size="12" >
+
+            <div className="login-signup">
+
+            <form autoComplete="off"> 
               <Input
                 value={this.state.email}
                 onChange={this.handleInputChange}
                 name="email"
-                placeholder="email (required)"
+                placeholder="email"
               />
               <Input
                 value={this.state.password}
                 onChange={this.handleInputChange}
                 name="password"
-                placeholder="(required)"
+                placeholder="password"
                 type="password"
               />
-              
               <FormBtn
                 disabled={!(this.state.email && this.state.password)}
                 onClick={this.handleFormSubmit}
-              >
-                Log in
+              > Log in 
               </FormBtn>
-             <Link to="/signup">
-               <FormBtn> Signup </FormBtn>
-             </Link>
+              <FormBtnSecondary onClick={this.refreshPage}
+              > Cancel 
+              </FormBtnSecondary>
             </form>
+
+            <p >Not a member? <Link to="/signup">Signup here.</Link></p>
+
+            </div>
+
           </Col>
         </Row>
-      </Container>
     );
   }
 }
