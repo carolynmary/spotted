@@ -90,6 +90,12 @@ $icon-size: 35px;
   margin-bottom: 20px;
 }
 
+#feed {
+  .card {
+    margin-bottom: 30px;
+  }
+}
+
 .full-width {
   width: 100% !important;
 }
@@ -121,6 +127,32 @@ $icon-size: 35px;
   p {
     padding-top: 100px;
     text-align: center;
+  }
+}
+
+.coming-soon {
+  background-image: url(./images/birdAni-g.gif);
+  height: 100vh;
+  margin-top: -170px;
+  margin-bottom: 0px;
+  z-index: -100;
+  text-align: center;
+  color: #000;
+  p {
+    padding-top: 65vh;
+    font-size: 2.8rem;
+    width: 60vw;
+    margin: auto;
+  }
+}
+
+.plus {
+  display: grid;
+  place-items: center;
+  img {
+    margin-top: 25vh;
+    margin-left: -15px;
+    width: 13%;
   }
 }
 

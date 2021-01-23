@@ -1,12 +1,13 @@
 #mapComponent {
-    display: flex;
-    justify-content: center;
-    padding-top: 5vw;
+  display: flex;
+  justify-content: center;
+  // padding-top: 5vw;
 }
 
 .map {
-    border: black solid 1px;
-    border-radius: 50%;
-    display: flex;
-    
+  border: black solid 1px;
+  width: 650px !important;
+  height: 650px !important;
+  border-radius: 50%;
+  display: flex;
 }
