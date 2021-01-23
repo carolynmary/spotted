@@ -5,7 +5,11 @@ function Clinic() {
   return (
     <Row>
       <Col size="md-12">
-        <h1>CLINIC</h1>
+        <div class="jumbotron jumbotron-fluid coming-soon">
+          <div class="container ">
+            <p class="lead">For when you need to know where to take these broken wings, coming soon.</p>
+          </div>
+        </div>
       </Col>
     </Row>
   );

@@ -5,7 +5,11 @@ function Info() {
   return (
     <Row>
       <Col size="md-12">
-        <h1>INFO</h1>
+        <div class="jumbotron jumbotron-fluid coming-soon">
+          <div class="container ">
+            <p class="lead">Sorry for the birden, our beakipedia page is being nested.</p>
+          </div>
+        </div>
       </Col>
     </Row>
   );
