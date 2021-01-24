@@ -7,9 +7,10 @@ const formidable = require("formidable");
 const postSchema = new Schema({
 	username: { type: String, required: true },
 	// photo: { type: File, required: true },
-	body: { type: String, required: true },
+	species: { type: String },
+	body: { type: String },
 	date: { type: Date, default: Date.now },
-	// location: { type: Point, required: true },
+	// location: { type: "Point", required: true },
 });
 
 const Post = mongoose.model("Post", postSchema);
