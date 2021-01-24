@@ -1,3 +1,5 @@
+// change comment to Post, change user to Users etc. 
+
 
 const mongoose = require("mongoose");
 const db = require("../models");
@@ -13,21 +15,39 @@ mongoose.connect(process.env.ATLAS_URL || "mongodb://localhost/mern",
    mongoOptions
 );
 
-// remove all posts
-db.Post.deleteMany({})
+const userSeed = 
+   {
+      username: "Admin",
+      email: "admin@contact.us",
+      password: "1"
+   }
+;
+const commentsSeeds = [
+   {
+      body: "🚀 initial seed",
+      username: "Admin"
+   },
+   {
+      body: "👾 another",
+      username: "Admin"
+   },
+
+];
+
+// remove all comments
+db.Comment.deleteMany({})
 // remove all users
   .then(() => db.User.deleteMany({}))
   // add user
   .then(() => db.User.create(userSeed))
   // add comments seeds
-  .then((user) => db.Post.create(postSeed[0])
+  .then((user) => db.Comment.create(commentsSeeds[0])
       // add comment ref to user
-      .then(({_id}) => db.User.findOneAndUpdate({_id: user._id}, { $push: { posts: _id } }, { new: true }))
+      .then(({_id}) => db.User.findOneAndUpdate({_id: user._id}, { $push: { comments: _id } }, { new: true }))
   )
-//   is the above necessary?? -SP
-  .then((user) => db.Comment.create([postSeed][1])
+  .then((user) => db.Comment.create(commentsSeeds[1])
       // add comment ref to user
-      .then(({_id}) => db.User.findOneAndUpdate({_id: user._id}, { $push: { posts: _id } }, { new: true }))
+      .then(({_id}) => db.User.findOneAndUpdate({_id: user._id}, { $push: { comments: _id } }, { new: true }))
   )
   .then(() => {
     process.exit(0);
@@ -35,15 +55,4 @@ db.Post.deleteMany({})
   .catch(err => {
     console.error(err);
     process.exit(1);
-  });
-
-//remove all clinics and re seed
-db.Clinic.deleteMany({})
-  .then(() => db.Clinic.create(clinicSeed))
-  .then(() => {
-     process.exit(0);
-  })
-  .catch(err => {
-     console.error(err);
-     process.exit(1);
   });
