@@ -1,6 +1,6 @@
 module.exports = {
-  Post: require("./Post"),
+  // Post: require("./Post"),
   User: require("./User"),
-  Clinic: require("./Clinic"),
+  // Clinic: require("./Clinic"),
 };
 
