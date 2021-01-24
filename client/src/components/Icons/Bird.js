@@ -1,5 +1,5 @@
 import React from "react";
-import bird from "../../images/bird.png"
+import bird from "../../images/bird.svg"
 import "./icons.scss"
 
 function Bird() {
